@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Composer{% endblock %}
+
+{% block body %}
+    <h1>Edit Composer</h1>
+
+    {{ include('composer/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('composer_index') }}">back to list</a>
+
+    {{ include('composer/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Composer{% endblock %}
+
+{% block body %}
+    <h1>Create new Composer</h1>
+
+    {{ include('composer/_form.html.twig') }}
+
+    <a href="{{ path('composer_index') }}">back to list</a>
+{% endblock %}
