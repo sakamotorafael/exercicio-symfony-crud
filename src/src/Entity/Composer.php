@@ -45,11 +45,7 @@ class Composer
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Your name cannot contain a number"
-     * )
+     *
      */
     private $mainStyle;
 

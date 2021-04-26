@@ -20,11 +20,7 @@ class Oeuvre
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="This field cannot contain a number"
-     * )
+     * 
      */
     private $name;
 

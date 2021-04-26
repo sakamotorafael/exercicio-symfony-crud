@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Lucida Sans', sans-serif;
+}
+
+h1{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+form, table {
+  width: 80%;
+  margin: auto;
+  border: 1px solid #ccc;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+label {
+  font-size: 14pt;
+}
+
+input {
+  margin-top: 5px;
+  font-size: 14pt;
+  padding: 4px 4px;
+  width: 100%;
+}
+
+table {
+  margin-top: 15px;
+}
+
+a {
+  display:flex;
+  text-decoration: none;
+  color: orangered;
+  font-weight: bold;
+}
+
+a:hover {
+  color: red;
+}
+
+form div {
+  width: 100%;
+}
+
+form div div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  margin-top: 14px;
+}
+
+.show th {
+  text-align: right;
+  padding-right: 20px;
+}
+.show td {
+  text-align: left;
+}
+
+select {
+  max-width: 100px;
+  align-self: center;
+}

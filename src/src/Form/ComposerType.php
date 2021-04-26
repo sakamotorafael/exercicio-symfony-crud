@@ -6,6 +6,7 @@ use App\Entity\Composer;
 use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,9 +23,9 @@ class ComposerType extends AbstractType
         $builder
             ->add('name')
             ->add('nationality')
-            ->add('birthDate', DateType::class, ['years' => range($startYear, $endBithYear)])
-            ->add('deathDate', DateType::class, ['years' => range($startYear, $endYear)])
-            ->add('mainStyle')
+            ->add('birthDate', DateType::class, ['years' => range($startYear, $endBithYear), 'label_format' => 'Birth'])
+            ->add('deathDate', DateType::class, ['years' => range($startYear, $endYear), 'label_format' => 'Death'])
+            ->add('mainStyle', TextType::class, ['label_format' => 'Main style'])
         ;
     }
 
