@@ -35,14 +35,11 @@ class Catalogue
     private $organizationMethod;
 
     /**
-     * @ORM\OneToMany(targetEntity=Oeuvre::class, mappedBy="catalogue")
+     * @ORM\OneToOne(targetEntity=Composer::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $oeuvres;
+    private $composer;
 
-    public function __construct()
-    {
-        $this->oeuvres = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -85,33 +82,16 @@ class Catalogue
         return $this;
     }
 
-    /**
-     * @return Collection|Oeuvre[]
-     */
-    public function getOeuvres(): Collection
+    public function getComposer(): ?Composer
     {
-        return $this->oeuvres;
+        return $this->composer;
     }
 
-    public function addOeuvre(Oeuvre $oeuvre): self
+    public function setComposer(Composer $composer): self
     {
-        if (!$this->oeuvres->contains($oeuvre)) {
-            $this->oeuvres[] = $oeuvre;
-            $oeuvre->setCatalogue($this);
-        }
+        $this->composer = $composer;
 
         return $this;
     }
 
-    public function removeOeuvre(Oeuvre $oeuvre): self
-    {
-        if ($this->oeuvres->removeElement($oeuvre)) {
-            // set the owning side to null (unless already changed)
-            if ($oeuvre->getCatalogue() === $this) {
-                $oeuvre->setCatalogue(null);
-            }
-        }
-
-        return $this;
-    }
 }

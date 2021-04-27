@@ -44,7 +44,7 @@ class Composer
     /**
      * @ORM\OneToMany(targetEntity=Oeuvre::class, mappedBy="composer", orphanRemoval=true)
      */
-    private $oeuvre;
+    private $oeuvres;
 
 
     /**
@@ -61,7 +61,7 @@ class Composer
 
     public function __construct()
     {
-        $this->oeuvre = new ArrayCollection();
+        $this->oeuvres = new ArrayCollection();
         $this->styles = new ArrayCollection();
     }
 
@@ -112,15 +112,15 @@ class Composer
     /**
      * @return Collection|Oeuvre[]
      */
-    public function getOeuvre(): Collection
+    public function getOeuvres(): Collection
     {
-        return $this->oeuvre;
+        return $this->oeuvres;
     }
 
-    public function addOeuvre(Oeuvre $oeuvre): self
+    public function addOeuvres(Oeuvre $oeuvre): self
     {
-        if (!$this->oeuvre->contains($oeuvre)) {
-            $this->oeuvre[] = $oeuvre;
+        if (!$this->oeuvres->contains($oeuvre)) {
+            $this->oeuvres[] = $oeuvre;
             $oeuvre->setComposer($this);
         }
 
@@ -129,7 +129,7 @@ class Composer
 
     public function removeOeuvre(Oeuvre $oeuvre): self
     {
-        if ($this->oeuvre->removeElement($oeuvre)) {
+        if ($this->oeuvres->removeElement($oeuvre)) {
             // set the owning side to null (unless already changed)
             if ($oeuvre->getComposer() === $this) {
                 $oeuvre->setComposer(null);
