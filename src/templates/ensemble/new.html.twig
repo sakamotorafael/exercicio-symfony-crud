@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ensemble{% endblock %}
+
+{% block body %}
+    <h1>Create new Ensemble</h1>
+
+    {{ include('ensemble/_form.html.twig') }}
+
+    <a href="{{ path('ensemble_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Ensemble{% endblock %}
+
+{% block body %}
+    <h1>Edit Ensemble</h1>
+
+    {{ include('ensemble/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ensemble_index') }}">back to list</a>
+
+    {{ include('ensemble/_delete_form.html.twig') }}
+{% endblock %}

@@ -10,10 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Nationality</th>
-                <th>Birth</th>
-                <th>Death</th>
-                <th>Main style</th>
+                <th>BirthDate</th>
+                <th>DeathDate</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,10 +20,8 @@
             <tr>
                 <td>{{ composer.id }}</td>
                 <td>{{ composer.name }}</td>
-                <td>{{ composer.nationality }}</td>
                 <td>{{ composer.birthDate ? composer.birthDate|date('Y-m-d') : '' }}</td>
                 <td>{{ composer.deathDate ? composer.deathDate|date('Y-m-d') : '' }}</td>
-                <td>{{ composer.mainStyle }}</td>
                 <td>
                     <a href="{{ path('composer_show', {'id': composer.id}) }}">show</a>
                     <a href="{{ path('composer_edit', {'id': composer.id}) }}">edit</a>
@@ -33,7 +29,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

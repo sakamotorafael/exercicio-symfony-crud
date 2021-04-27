@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Composer</h1>
 
-    <table class="table show">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -16,20 +16,12 @@
                 <td>{{ composer.name }}</td>
             </tr>
             <tr>
-                <th>Nationality</th>
-                <td>{{ composer.nationality }}</td>
-            </tr>
-            <tr>
-                <th>Birth</th>
+                <th>BirthDate</th>
                 <td>{{ composer.birthDate ? composer.birthDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Death</th>
+                <th>DeathDate</th>
                 <td>{{ composer.deathDate ? composer.deathDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Main style</th>
-                <td>{{ composer.mainStyle }}</td>
             </tr>
         </tbody>
     </table>

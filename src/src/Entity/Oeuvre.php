@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OeuvreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,26 +33,10 @@ class Oeuvre
     private $opus;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Positive
-     */
-    private $number;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $tonality;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $catalogName;
-
-    /**
-     * @ORM\Column(type="integer", length=255, nullable=true)
-     * @Assert\Positive
-     */
-    private $catalogNumber;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -63,9 +49,35 @@ class Oeuvre
     private $genre;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Composer::class, inversedBy="oeuvre")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $composer;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Piece::class, mappedBy="oeuvre", orphanRemoval=true)
+     */
+    private $pieces;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $catalogueNumber;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Ensemble::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ensemble;
+
+
+    public function __construct()
+    {
+        $this->pieces = new ArrayCollection();
+
+    }
+
+
 
     public function getId(): ?int
     {
@@ -96,18 +108,6 @@ class Oeuvre
         return $this;
     }
 
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(?int $number): self
-    {
-        $this->number = $number;
-
-        return $this;
-    }
-
     public function getTonality(): ?string
     {
         return $this->tonality;
@@ -116,30 +116,6 @@ class Oeuvre
     public function setTonality(?string $tonality): self
     {
         $this->tonality = $tonality;
-
-        return $this;
-    }
-
-    public function getCatalogName(): ?string
-    {
-        return $this->catalogName;
-    }
-
-    public function setCatalogName(?string $catalogName): self
-    {
-        $this->catalogName = $catalogName;
-
-        return $this;
-    }
-
-    public function getCatalogNumber(): ?int
-    {
-        return $this->catalogNumber;
-    }
-
-    public function setCatalogNumber(?int $catalogNumber): self
-    {
-        $this->catalogNumber = $catalogNumber;
 
         return $this;
     }
@@ -156,15 +132,70 @@ class Oeuvre
         return $this;
     }
 
-    public function getComposer(): ?int
+    public function getComposer(): ?Composer
     {
         return $this->composer;
     }
 
-    public function setComposer(int $composer): self
+    public function setComposer(?Composer $composer): self
     {
         $this->composer = $composer;
 
         return $this;
     }
+
+    /**
+     * @return Collection|Piece[]
+     */
+    public function getPieces(): Collection
+    {
+        return $this->pieces;
+    }
+
+    public function addPiece(Piece $piece): self
+    {
+        if (!$this->pieces->contains($piece)) {
+            $this->pieces[] = $piece;
+            $piece->setOeuvre($this);
+        }
+
+        return $this;
+    }
+
+    public function removePiece(Piece $piece): self
+    {
+        if ($this->pieces->removeElement($piece)) {
+            // set the owning side to null (unless already changed)
+            if ($piece->getOeuvre() === $this) {
+                $piece->setOeuvre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCatalogueNumber(): ?int
+    {
+        return $this->catalogueNumber;
+    }
+
+    public function setCatalogueNumber(?int $catalogueNumber): self
+    {
+        $this->catalogueNumber = $catalogueNumber;
+
+        return $this;
+    }
+
+    public function getEnsemble(): ?Ensemble
+    {
+        return $this->ensemble;
+    }
+
+    public function setEnsemble(?Ensemble $ensemble): self
+    {
+        $this->ensemble = $ensemble;
+
+        return $this;
+    }
+
 }

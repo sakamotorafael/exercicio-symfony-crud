@@ -15,7 +15,8 @@ class StyleType extends AbstractType
             ->add('name')
             ->add('startingYear')
             ->add('endingYear')
-            ->add('mainRegion')
+            ->add('countriesRange')
+            ->add('composers')
         ;
     }
 

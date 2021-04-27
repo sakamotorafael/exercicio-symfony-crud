@@ -14,7 +14,7 @@ class InstrumentType extends AbstractType
         $builder
             ->add('name')
             ->add('family')
-            ->add('extension')
+            ->add('ensemble')
         ;
     }
 

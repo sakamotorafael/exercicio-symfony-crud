@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StyleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -41,15 +43,22 @@ class Style
     private $endingYear;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Your name cannot contain a number"
-     * )
+     * @ORM\ManyToMany(targetEntity=Country::class, inversedBy="styles")
      */
-    private $mainRegion;
+    private $countriesRange;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Composer::class, mappedBy="styles")
+     */
+    private $composers;
+
+    public function __construct()
+    {
+        $this->countriesRange = new ArrayCollection();
+        $this->composers = new ArrayCollection();
+    }
+
+  
     public function getId(): ?int
     {
         return $this->id;
@@ -91,15 +100,56 @@ class Style
         return $this;
     }
 
-    public function getMainRegion(): ?string
+    /**
+     * @return Collection|Country[]
+     */
+    public function getCountriesRange(): Collection
     {
-        return $this->mainRegion;
+        return $this->countriesRange;
     }
 
-    public function setMainRegion(string $mainRegion): self
+    public function addCountriesRange(Country $countriesRange): self
     {
-        $this->mainRegion = $mainRegion;
+        if (!$this->countriesRange->contains($countriesRange)) {
+            $this->countriesRange[] = $countriesRange;
+        }
 
         return $this;
     }
+
+    public function removeCountriesRange(Country $countriesRange): self
+    {
+        $this->countriesRange->removeElement($countriesRange);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Composer[]
+     */
+    public function getComposers(): Collection
+    {
+        return $this->composers;
+    }
+
+    public function addComposer(Composer $composer): self
+    {
+        if (!$this->composers->contains($composer)) {
+            $this->composers[] = $composer;
+            $composer->addStyle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComposer(Composer $composer): self
+    {
+        if ($this->composers->removeElement($composer)) {
+            $composer->removeStyle($this);
+        }
+
+        return $this;
+    }
+
+
 }

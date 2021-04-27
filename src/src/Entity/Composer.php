@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ComposerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,11 +31,6 @@ class Composer
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nationality;
-
-    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $birthDate;
@@ -43,11 +40,31 @@ class Composer
      */
     private $deathDate;
 
+
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     *
+     * @ORM\OneToMany(targetEntity=Oeuvre::class, mappedBy="composer", orphanRemoval=true)
      */
-    private $mainStyle;
+    private $oeuvre;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="composers")
+     */
+    private $styles;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Catalogue::class, cascade={"persist", "remove"})
+     */
+    private $catalogue;
+
+
+
+    public function __construct()
+    {
+        $this->oeuvre = new ArrayCollection();
+        $this->styles = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -66,17 +83,6 @@ class Composer
         return $this;
     }
 
-    public function getNationality(): ?string
-    {
-        return $this->nationality;
-    }
-
-    public function setNationality(string $nationality): self
-    {
-        $this->nationality = $nationality;
-
-        return $this;
-    }
 
     public function getBirthDate(): ?\DateTimeInterface
     {
@@ -102,15 +108,72 @@ class Composer
         return $this;
     }
 
-    public function getMainStyle(): ?int
+
+    /**
+     * @return Collection|Oeuvre[]
+     */
+    public function getOeuvre(): Collection
     {
-        return $this->mainStyle;
+        return $this->oeuvre;
     }
 
-    public function setMainStyle(?int $mainStyle): self
+    public function addOeuvre(Oeuvre $oeuvre): self
     {
-        $this->mainStyle = $mainStyle;
+        if (!$this->oeuvre->contains($oeuvre)) {
+            $this->oeuvre[] = $oeuvre;
+            $oeuvre->setComposer($this);
+        }
 
         return $this;
     }
+
+    public function removeOeuvre(Oeuvre $oeuvre): self
+    {
+        if ($this->oeuvre->removeElement($oeuvre)) {
+            // set the owning side to null (unless already changed)
+            if ($oeuvre->getComposer() === $this) {
+                $oeuvre->setComposer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Style[]
+     */
+    public function getStyles(): Collection
+    {
+        return $this->styles;
+    }
+
+    public function addStyle(Style $style): self
+    {
+        if (!$this->styles->contains($style)) {
+            $this->styles[] = $style;
+        }
+
+        return $this;
+    }
+
+    public function removeStyle(Style $style): self
+    {
+        $this->styles->removeElement($style);
+
+        return $this;
+    }
+
+    public function getCatalogue(): ?Catalogue
+    {
+        return $this->catalogue;
+    }
+
+    public function setCatalogue(?Catalogue $catalogue): self
+    {
+        $this->catalogue = $catalogue;
+
+        return $this;
+    }
+
+  
 }
