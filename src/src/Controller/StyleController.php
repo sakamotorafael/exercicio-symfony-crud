@@ -79,4 +79,6 @@ class StyleController extends AbstractController
 
         return $this->redirectToRoute('style_index');
     }
+
+    
 }

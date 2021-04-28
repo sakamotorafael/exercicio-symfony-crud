@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Composer;
+use App\Entity\Catalogue;
 use App\Form\ComposerType;
 use App\Repository\ComposerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,8 +30,10 @@ class ComposerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($composer);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('composer_index');

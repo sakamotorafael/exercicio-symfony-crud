@@ -53,7 +53,7 @@ class Composer
     private $styles;
 
     /**
-     * @ORM\OneToOne(targetEntity=Catalogue::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Catalogue::class, mappedBy="composer", cascade={"persist", "remove"})
      */
     private $catalogue;
 
@@ -175,5 +175,9 @@ class Composer
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
   
 }

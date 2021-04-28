@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Oeuvre;
 use App\Form\OeuvreType;
 use App\Repository\OeuvreRepository;
+use App\Service\InfoStringService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,8 @@ class OeuvreController extends AbstractController
             return $this->redirectToRoute('oeuvre_index');
         }
 
+        
+
         return $this->render('oeuvre/new.html.twig', [
             'oeuvre' => $oeuvre,
             'form' => $form->createView(),
@@ -43,10 +46,12 @@ class OeuvreController extends AbstractController
     }
 
     #[Route('/{id}', name: 'oeuvre_show', methods: ['GET'])]
-    public function show(Oeuvre $oeuvre): Response
+    public function show(Oeuvre $oeuvre, InfoStringService $infoStringService): Response
     {
+        $completeName = $infoStringService->oeuvre($oeuvre);
         return $this->render('oeuvre/show.html.twig', [
             'oeuvre' => $oeuvre,
+            'completeName' => $completeName
         ]);
     }
 

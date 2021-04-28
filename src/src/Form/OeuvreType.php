@@ -16,7 +16,6 @@ class OeuvreType extends AbstractType
             ->add('opus')
             ->add('tonality')
             ->add('genre')
-            ->add('catalogueNumber')
             ->add('composer')
             ->add('ensemble')
         ;

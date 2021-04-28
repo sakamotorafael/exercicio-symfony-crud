@@ -59,16 +59,17 @@ class Oeuvre
      */
     private $pieces;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $catalogueNumber;
 
     /**
      * @ORM\ManyToOne(targetEntity=Ensemble::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $ensemble;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Catalogage::class, mappedBy="oeuvre", cascade={"persist", "remove"})
+     */
+    private $catalogage;
 
 
     public function __construct()
@@ -174,18 +175,6 @@ class Oeuvre
         return $this;
     }
 
-    public function getCatalogueNumber(): ?int
-    {
-        return $this->catalogueNumber;
-    }
-
-    public function setCatalogueNumber(?int $catalogueNumber): self
-    {
-        $this->catalogueNumber = $catalogueNumber;
-
-        return $this;
-    }
-
     public function getEnsemble(): ?Ensemble
     {
         return $this->ensemble;
@@ -194,6 +183,23 @@ class Oeuvre
     public function setEnsemble(?Ensemble $ensemble): self
     {
         $this->ensemble = $ensemble;
+
+        return $this;
+    }
+
+    public function getCatalogage(): ?Catalogage
+    {
+        return $this->catalogage;
+    }
+
+    public function setCatalogage(Catalogage $catalogage): self
+    {
+        // set the owning side of the relation if necessary
+        if ($catalogage->getOeuvre() !== $this) {
+            $catalogage->setOeuvre($this);
+        }
+
+        $this->catalogage = $catalogage;
 
         return $this;
     }

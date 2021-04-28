@@ -23,7 +23,7 @@ class ComposerType extends AbstractType
             ->add('birthDate', DateType::class, ['years' => range($lastBirthYear, 1600)])
             ->add('deathDate', DateType::class, ['years' => range($lastDeathYear, 1600)])
             ->add('styles')
-            ->add('catalogue')
+            ->add('catalogue', CatalogueType::class)
         ;
     }
 
