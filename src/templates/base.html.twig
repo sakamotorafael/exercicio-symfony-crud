@@ -7,53 +7,58 @@
 				Classical Classify
 			{% endblock %}
 		</title>
-		{% block stylesheets %}
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-		{% endblock %}
-	</head>
-	<body>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">Navbar</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="navbar-nav">
-					<li class="nav-item active">
-						<a class="nav-link" href="/">Home
-							<span class="sr-only">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/login">Login</a>
-					</li>
-					<li class="nav-item" hidden>
-						<a class="nav-link" href="#"></a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Database
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="/oeuvre">Oeuvres</a>
-							<a class="dropdown-item" href="/catalogage">Catalogage</a>
-							<a class="dropdown-item" href="/country">Countries</a>
-							<a class="dropdown-item" href="/instrument">Instruments</a>
-							<a class="dropdown-item" href="/ensemble">Ensemble</a>
-							<a class="dropdown-item" href="/style">Styles</a>
-							<a class="dropdown-item" href="/composer">Composers</a>
-							<a class="dropdown-item" href="/catalog">Catalogs</a>
-							<a class="dropdown-item" href="/piece">Pieces</a>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		{% block body %}{% endblock %}
-		{% block javascripts %}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> {% block stylesheets %}{% endblock %}
+		</head>
+		<body>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				{% if app.user %}
+					<a class="navbar-brand" href="#">{{ app. user }}</a>
+				{% endif %}
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav">
+						<li class="nav-item active">
+							<a class="nav-link" href="/">Home
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						{% if app.user %}
+							<li class="nav-item">
+								<a class="nav-link" href="/logout">Logout</a>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link" href="/login">Login</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/user/new">Sign up</a>
+							</li>
+						{% endif %}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Database
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="/oeuvre">Oeuvres</a>
+								<a class="dropdown-item" href="/catalogage">Catalogage</a>
+								<a class="dropdown-item" href="/country">Countries</a>
+								<a class="dropdown-item" href="/instrument">Instruments</a>
+								<a class="dropdown-item" href="/ensemble">Ensemble</a>
+								<a class="dropdown-item" href="/style">Styles</a>
+								<a class="dropdown-item" href="/composer">Composers</a>
+								<a class="dropdown-item" href="/catalog">Catalogs</a>
+								<a class="dropdown-item" href="/piece">Pieces</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			{% block body %}{% endblock %}
+			{% block javascripts %}{% endblock %}
 			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-		{% endblock %}
-	</body>
+		</body>
 
-</html>
+	</html>
