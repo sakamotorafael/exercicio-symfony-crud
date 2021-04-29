@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OeuvreRepository;
+use App\Service\InfoStringService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -202,6 +203,12 @@ class Oeuvre
         $this->catalogage = $catalogage;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        $iss = new InfoStringService();
+        return $iss->oeuvre($this);
     }
 
 }

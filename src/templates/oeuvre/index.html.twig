@@ -13,7 +13,7 @@
                 <th>Opus</th>
                 <th>Tonality</th>
                 <th>Genre</th>
-                <th>CatalogueNumber</th>
+                <th>Composer</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -25,7 +25,7 @@
                 <td>{{ oeuvre.opus }}</td>
                 <td>{{ oeuvre.tonality }}</td>
                 <td>{{ oeuvre.genre }}</td>
-                <td>{{ oeuvre.catalogueNumber }}</td>
+                <td>{{ oeuvre.composer }}</td>
                 <td>
                     <a href="{{ path('oeuvre_show', {'id': oeuvre.id}) }}">show</a>
                     <a href="{{ path('oeuvre_edit', {'id': oeuvre.id}) }}">edit</a>

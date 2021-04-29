@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Catalogage{% endblock %}
+
+{% block body %}
+    <h1>Create new Catalogage</h1>
+
+    {{ include('catalogage/_form.html.twig') }}
+
+    <a href="{{ path('catalogage_index') }}">back to list</a>
+{% endblock %}

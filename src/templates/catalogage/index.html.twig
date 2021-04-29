@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogage index{% endblock %}
+
+{% block body %}
+    <h1>Catalogage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Number</th>
+                <th>Oeuvre</th>
+                <th>Catalogue</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for catalogage in catalogages %}
+            <tr>
+                <td>{{ catalogage.id }}</td>
+                <td>{{ catalogage.number }}</td>
+                <td>{{ catalogage.oeuvre }}</td>
+                <td>{{ catalogage.catalogue }}</td>
+                <td>
+                    <a href="{{ path('catalogage_show', {'id': catalogage.id}) }}">show</a>
+                    <a href="{{ path('catalogage_edit', {'id': catalogage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('catalogage_new') }}">Create new</a>
+{% endblock %}

@@ -171,7 +171,7 @@ class Composer
     public function setCatalogue(?Catalogue $catalogue): self
     {
         $this->catalogue = $catalogue;
-
+        $catalogue->setComposer($this);
         return $this;
     }
 
