@@ -28,12 +28,13 @@
                 <td>{{ oeuvre.genre }}</td>
             </tr>
             <tr>
-                <th>CatalogueNumber</th>
-                <td>{{ oeuvre.catalogueNumber }}</td>
+                <th>Pieces</th>
+                {% for piece in oeuvre.pieces %}
+                    <td> {{ piece }} </td>
+                {% endfor %}
             </tr>
         </tbody>
 
-        <h2> {{ completeName }} </h2>
     </table>
 
     <a href="{{ path('oeuvre_index') }}">back to list</a>
