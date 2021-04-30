@@ -24,7 +24,7 @@
                 <td>{{ catalogue.organizationMethod }}</td>
                 <td>
                     <a href="{{ path('catalogue_show', {'id': catalogue.id}) }}">show</a>
-                    <a href="{{ path('catalogue_edit', {'id': catalogue.id}) }}">edit</a>
+                    <a href="{{ path('composer_edit', {'id': catalogue.composer.id }) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +34,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('catalogue_new') }}">Create new</a>
+    <p>To add a new catalogue, edit or create a <a href="/composer">composer</a>.
 {% endblock %}

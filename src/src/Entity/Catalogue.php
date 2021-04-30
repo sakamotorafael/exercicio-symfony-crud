@@ -35,7 +35,7 @@ class Catalogue
     private $organizationMethod;
 
     /**
-     * @ORM\OneToOne(targetEntity=Composer::class, inversedBy="catalogue", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Composer::class, inversedBy="catalogue", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $composer;

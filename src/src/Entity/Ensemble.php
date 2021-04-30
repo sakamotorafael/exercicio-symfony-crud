@@ -29,15 +29,6 @@ class Ensemble
      */
     private $partsCount;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Instrument::class, mappedBy="ensemble")
-     */
-    private $instruments;
-
-    public function __construct()
-    {
-        $this->instruments = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -52,30 +43,6 @@ class Ensemble
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Instrument[]
-     */
-    public function getInstruments(): Collection
-    {
-        return $this->instruments;
-    }
-
-    public function addInstrument(Instrument $instrument): self
-    {
-        if (!$this->instruments->contains($instrument)) {
-            $this->instruments[] = $instrument;
-        }
-
-        return $this;
-    }
-
-    public function removeInstrument(Instrument $instrument): self
-    {
-        $this->instruments->removeElement($instrument);
 
         return $this;
     }

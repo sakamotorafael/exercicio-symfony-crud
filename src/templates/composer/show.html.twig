@@ -16,12 +16,16 @@
                 <td>{{ composer.name }}</td>
             </tr>
             <tr>
-                <th>BirthDate</th>
+                <th>Birth</th>
                 <td>{{ composer.birthDate ? composer.birthDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>DeathDate</th>
+                <th>Death</th>
                 <td>{{ composer.deathDate ? composer.deathDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Catalogue</th>
+                <td>{{ composer.catalogue }}</td>
             </tr>
         </tbody>
     </table>

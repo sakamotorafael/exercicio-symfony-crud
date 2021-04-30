@@ -170,8 +170,10 @@ class Composer
 
     public function setCatalogue(?Catalogue $catalogue): self
     {
-        $this->catalogue = $catalogue;
-        $catalogue->setComposer($this);
+        if($catalogue->getName() != null){
+            $this->catalogue = $catalogue;
+            $catalogue->setComposer($this);
+        }
         return $this;
     }
 
@@ -179,5 +181,4 @@ class Composer
     {
         return $this->name;
     }
-  
 }
